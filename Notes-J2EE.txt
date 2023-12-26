@@ -166,3 +166,5 @@ App1
     - css files
     - js files
     - image files
+
+Note: From servlet api 3.0, annotation based configuration is introduced that reduce the uses of xml(web.xml) based configuration.
