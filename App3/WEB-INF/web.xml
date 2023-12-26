@@ -1,3 +1,9 @@
 <web-app>
     <display-name>Annotation | Hello World APP</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>home.html</welcome-file>
+        <welcome-file>welcome.html</welcome-file>
+    </welcome-file-list>
 </web-app>

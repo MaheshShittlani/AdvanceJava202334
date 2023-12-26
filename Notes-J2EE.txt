@@ -167,4 +167,18 @@ App1
     - js files
     - image files
 
+Program: Write a servlet to say "Hello World".
+
 Note: From servlet api 3.0, annotation based configuration is introduced that reduce the uses of xml(web.xml) based configuration.
+
+Program: ReWrite a servlet to say "Hello World" with annotation based configutation.
+
+Configuration for the welcome files
+-------------------------
+<welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>home.html</welcome-file>
+    <welcome-file>welcome.html</welcome-file>
+</welcome-file-list>
+
+Program: Write a program to process the user input through servlet.
