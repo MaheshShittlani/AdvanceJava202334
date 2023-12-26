@@ -1,4 +1,5 @@
 <web-app>
+    <display-name>Hello World APP</display-name>
     <servlet>
         <servlet-name>helloWorldServlet</servlet-name>
         <servlet-class>HelloWorldServlet</servlet-class>
