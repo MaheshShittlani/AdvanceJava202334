@@ -182,3 +182,38 @@ Configuration for the welcome files
 </welcome-file-list>
 
 Program: Write a program to process the user input through servlet.
+
+IDE - Integrated Development environment.
+-----------
+1. Editor
+2. Compiler
+3. Intellisense
+4. Interpretor
+5. Code management tools
+6. Code generation tools
+7. Third party tools
+
+Java popular IDE
+---------------------
+1. Ecllipse - Free 
+2. Visual Studio Code - Free
+3. Netbeans - Free trial
+4. Intellij Idea - Paid
+
+
+Ecllipse Directory Structure
+-------------------------------
+src (Source code)
+    - main
+        - java
+            - java files organized in packages
+        - webapp
+            -WEB-INF
+                -classes
+                -lib
+                -web.xml
+            -META-INF
+            - public files (html, css, js, jsp etc)
+build
+    - classes
+        - java complied classes

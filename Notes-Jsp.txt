@@ -1,0 +1,13 @@
+JSP 
+------------
+1. JSP (JavaServer Pages) is a technology used for creating dynamic web pages in Java-based web applications.
+2. It allows you to mix HTML markup and Java code to generate dynamic content.
+3. JSP pages are processed by the web server before being sent to the client's browser.
+4. JSP allows you to embed Java code within the HTML markup using special tags such as <% %>, <%= %>, and <%! %>. These tags are used to execute Java code, evaluate expressions, and define variables or methods.
+5. Implicit Objects: JSP provides several implicit objects that are available within JSP pages without requiring explicit declaration. 
+Examples of implicit objects includes
+    - request, 
+	- response, 
+	- out
+	- session, 
+	- application, 
