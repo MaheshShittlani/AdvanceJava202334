@@ -1,3 +1,4 @@
+<%@page import="business.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,16 +10,16 @@
 <body>
 	<h1>Thanks for subscribing us</h1>
 	<p>You have filled the detail given below...</p>
-	
+	<% User user = (User)request.getAttribute("user"); %>
 	<table border="1" width="200px">
 		<tr>
-			<td>Name: </td> <td><%=request.getParameter("name") %></td>
+			<td>Name: </td> <td><%=user.getName() %></td>
 		</tr>
 		<tr>	
-			<td>Mobile: </td> <td><%= request.getParameter("mobile") %></td>
+			<td>Mobile: </td> <td><%= user.getMobile() %></td>
 		</tr>
 		<tr>	
-			<td>Email: </td> <td><%= request.getParameter("email") %></td>
+			<td>Email: </td> <td><%= user.getEmail() %></td>
 		</tr>
 	</table>
 	<p><a href="index.jsp">Go Back</a></p>

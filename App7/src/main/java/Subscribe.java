@@ -1,7 +1,6 @@
 
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import business.User;
 import jakarta.servlet.RequestDispatcher;
@@ -41,6 +40,8 @@ public class Subscribe extends HttpServlet {
 		ServletContext context =  request.getServletContext();
 		String path = context.getRealPath("WEB-INF/subscriber.txt");
 		UserModel.store(user, path);
+		
+		request.setAttribute("user", user);
 		
 		RequestDispatcher dispatcher = context.getRequestDispatcher("/subscriber.jsp");
 		dispatcher.forward(request, response);
