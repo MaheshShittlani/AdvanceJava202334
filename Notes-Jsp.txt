@@ -11,3 +11,17 @@ Examples of implicit objects includes
 	- out
 	- session, 
 	- application, 
+
+JSP Tags
+----------------
+JSP (JavaServer Pages) provides various tags that allow you to perform specific actions or control the flow of execution within a JSP page. Here are some commonly used JSP tags and their uses:
+
+1. **Declaration Tags (`<%! ... %>`)**: Declaration tags are used to declare variables, methods, and other members that are accessible throughout the JSP page. They are typically placed at the beginning of the page.
+
+2. **Scriptlet Tags (`<% ... %>`)**: Scriptlet tags allow you to embed Java code within the JSP page. You can use them to perform dynamic operations, calculations, or conditionals. The Java code inside the scriptlet is executed when the page is processed.
+
+3. **Expression Tags (`<%= ... %>`)**: Expression tags are used to evaluate and display the value of an expression within the HTML markup. The expression can be a variable, a method call, or any valid Java expression. The result of the expression is automatically converted to a string and included in the HTML output.
+
+4. **Directive Tags (`<%@ ... %>`)**: Directive tags are used to provide instructions to the JSP container about how to process the JSP page. They are typically used to import Java classes, define error handling pages, or set page-level attributes such as content type or session behavior.
+
+5. **Include Directive (`<%@ include ... %>`)**: The include directive is used to include the content of another file into the current JSP page during the translation phase. It is useful for reusing common page elements or including external resources.

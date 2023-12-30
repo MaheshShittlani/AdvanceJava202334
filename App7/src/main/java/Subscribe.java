@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import business.User;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import model.UserModel;
 @WebServlet("/subscribe")
 public class Subscribe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private int counter;   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,11 +27,22 @@ public class Subscribe extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    
+
+    @Override
+	public void init(ServletConfig config) throws ServletException {
+		this.counter = 0;
+		super.init(config);
+	}
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.counter = this.counter + 1;
 		String name = request.getParameter("name");
 		String mobile = request.getParameter("mobile");
 		String email = request.getParameter("email");
@@ -42,7 +54,7 @@ public class Subscribe extends HttpServlet {
 		UserModel.store(user, path);
 		
 		request.setAttribute("user", user);
-		
+		request.setAttribute("counter", counter);
 		RequestDispatcher dispatcher = context.getRequestDispatcher("/subscriber.jsp");
 		dispatcher.forward(request, response);
 	}

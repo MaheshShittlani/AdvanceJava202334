@@ -11,6 +11,7 @@
 	<h1>Thanks for subscribing us</h1>
 	<p>You have filled the detail given below...</p>
 	<% User user = (User)request.getAttribute("user"); %>
+	
 	<table border="1" width="200px">
 		<tr>
 			<td>Name: </td> <td><%=user.getName() %></td>
@@ -22,6 +23,8 @@
 			<td>Email: </td> <td><%= user.getEmail() %></td>
 		</tr>
 	</table>
-	<p><a href="index.jsp">Go Back</a></p>
+	
+	<h1>Page Visits: <%=request.getAttribute("counter") %></h1>
+	<p><a href="index.html">Go Back</a></p>
 </body>
 </html>

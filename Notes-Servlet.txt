@@ -217,3 +217,45 @@ src (Source code)
 build
     - classes
         - java complied classes
+
+-----------------------------
+MVC - Code Restructure in a manner that Java code (business) logic can be decoupled from UI Code (html).
+------------------
+
+M (Model) - Are the classes which deal with storing and retrieving data from db or flat files
+V (View) - Are the files(html, jsp) which is used to display the pages/response to the user.
+C (Controllers) - Are the classes (servlet) which is used to handle the communication between view and models and plain java objects(POJO).
+
+--------------------------------------------
+
+Servlet Life Cycle
+--------------------------------------
+The life cycle of a servlet refers to the series of stages that a servlet goes through, from its initialization to its destruction. 
+
+1. **Initialization**: 
+	During initialization, the servlet container creates an instance of the servlet and initializes it by calling the `init()` method. This method is called only once during the lifetime of the servlet. It is typically used to perform one-time setup tasks, such as loading configurations, establishing database connections, or initializing resources.
+
+2. **Request Handling**: 
+	Once the servlet is initialized, it is ready to handle client requests. For each incoming request, the servlet container calls the `service()` method of the servlet. The `service()` method determines the type of the request (GET, POST, etc.) and delegates the request to the appropriate method (`doGet()`, `doPost()`, etc.) based on the HTTP method.
+
+3. **Request Processing**: 
+	The servlet's request processing methods, such as `doGet()` and `doPost()`, handle the request-specific logic. These methods are responsible for processing the request parameters, performing business operations, generating dynamic content, and interacting with databases or other external resources.
+
+4. **Response Generation**: 
+	After the request processing is complete, the servlet generates the response to be sent back to the client. The response typically includes HTML content, JSON data, or other forms of output. The servlet sets the response headers, writes the response body, and may also perform redirects or set cookies.
+
+5. **Destroying**: 
+	The servlet container calls the `destroy()` method when it decides to remove the servlet from service. This typically occurs when the container is shutting down or when the servlet is being unloaded due to configuration changes or application redeployment. The `destroy()` method is used to release any resources held by the servlet, close database connections, or perform cleanup tasks.
+
+
+Http Method
+------------------
+1. Get: doGet() - When get/feching the information from server.
+2. Post: doPost() - When posting/storing information on to the server.
+3. Put: doPut() - When updating detail
+4. Patch: doPatch() - When small information of data is patched or updated.
+5. Delete: doDelete() - Trying to delete the information 
+6. Head: doHead()
+7. Trace: doTrace()
+8. Option: doOption()
+
