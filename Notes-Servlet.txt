@@ -259,3 +259,148 @@ Http Method
 7. Trace: doTrace()
 8. Option: doOption()
 
+-------------------------------------------
+doGet(HttpRequest request, HttpResponse response)
+-------------
+
+HttpRequest Method
+---------------------
+1. String getMethod()
+2. String getParameter(String key): Retrieves the value of a request parameter specified by its key. It is commonly used to access from data or query parameters sent with the request.
+3. String[] getParamterValue(String key): Retrieves an array of values for a request parameter specified by its key. This method is used when a parameter can have multiple values, such as checkboxes with the same name.
+    Example:
+        <input type="checkbox" name="hobby" value="Cricket"> Cricket
+        <input type="checkbox" name="hobby" value="Football"> Football
+        <input type="checkbox" name="hobby" value="Music"> Music
+
+4. ServletContext getServletContext(): Returns the `ServletContext` associated with the servlet. ServletContext is a class which holds all the information related to the application environment.
+        Example#1:
+            ServletContext application = request.getServletContext();
+            applicaiton.getRealPath('\WEB-INF\subscriber.txt);
+                    OR
+            String path = request.getServletContext().getRealPath('\WEB-INF\subscriber.txt");
+        Example#2:
+            RequestDispatcher dispather = request.getRequestDispatcher(String path);
+
+5. void setAttribute(String key, Object data): Add some addition attribute into the request. But Important note is that the attribute lifecycle will be limited to the request.
+6. Object getAttribute(String key): Fetch the attribute value.
+
+RequestDispatcher: The RequestDispatcher interface in Java Servlet provides a way to forward a request from one servlet to another servlet or include the response of another servlet in the current response. It enables servlets to collaborate and share data during request processing.
+
+    forward(request, response)
+    include(request, response)
+
+response
+--------------
+    void sendRedirect(String path):
+        it send the response with the status code 302 and location header to the browser(client) so that client can redirect the request.
+    Example:
+        response.sendRedirect('subscriberDetail.jsp');
+
+---------------------------
+
+Setting The error page / exception handler in configuration (web.xml)
+-------------------------------------------------------
+<web-app>
+    <!-- Other configuration elements -->
+    
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/notFound.jsp</location>
+    </error-page>
+    
+    <!-- Other error-page mappings -->
+</web-app>
+
+Initialization Parameter
+--------------------------
+Initialization parameters in servlets allow you to pass configuration values to your servlet at the time of initialization. 
+
+These parameters can be defined in the deployment descriptor (web.xml) or using annotations. 
+
+Initialization parameters provide a way to configure the behavior of your servlet without modifying its code. Here are the ways to define initialization parameters in a servlet:
+
+Using web.xml (Deployment Descriptor):
+---------------------------------------
+In the web.xml file, you can define initialization parameters for a servlet using the <init-param> element within the <servlet> element. Here's an example:
+
+<web-app>
+  <!-- Other configuration elements -->
+  <servlet>
+    <servlet-name>MyServlet</servlet-name>
+    <servlet-class>com.example.MyServlet</servlet-class>
+    <init-param>
+      <param-name>param1</param-name>
+      <param-value>value1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>param2</param-name>
+      <param-value>value2</param-value>
+    </init-param>
+  </servlet>
+  <!-- Other servlet mappings -->
+</web-app>
+
+
+Using Annotations:
+----------------------
+With the Servlet API 3.0 and above, you can also use annotations to define initialization parameters directly in your servlet class. Here's an example:
+
+@WebServlet(name = "MyServlet", urlPatterns = { "/myservlet","/myserve" },
+            initParams = {
+                @WebInitParam(name = "param1", value = "value1"),
+                @WebInitParam(name = "param2", value = "value2")
+            })
+public class MyServlet extends HttpServlet {
+    // Servlet code goes here
+}
+
+Retrieve Init Parameter
+------------------------------
+To access the initialization parameters within the servlet, you can use the getInitParameter() method of the ServletConfig object. For example:
+
+
+public void init(ServletConfig config) throws ServletException {
+    super.init(config);
+    
+    String param1 = config.getInitParameter("param1");
+    String param2 = config.getInitParameter("param2");
+    
+    // Use the initialization parameters
+}
+
+Context parameter
+--------------------------
+Context parameters, also known as servlet context parameters or application-wide parameters, allow you to define global configuration values for your entire web application. These parameters are accessible to all servlets, filters, and other components within the application. Context parameters are useful when you need to share common configuration values across multiple servlets or components.
+
+
+Using web.xml (Deployment Descriptor):
+-----------------------------------------
+
+<web-app>
+  <!-- Other configuration elements -->
+  <context-param>
+    <param-name>param1</param-name>
+    <param-value>value1</param-value>
+  </context-param>
+  <context-param>
+    <param-name>param2</param-name>
+    <param-value>value2</param-value>
+  </context-param>
+</web-app>
+
+public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    ServletContext context = request.getServletContext();
+    
+    String param1 = context.getInitParameter("param1");
+    String param2 = context.getInitParameter("param2");
+    
+    // Use the context parameters
+}
+
+

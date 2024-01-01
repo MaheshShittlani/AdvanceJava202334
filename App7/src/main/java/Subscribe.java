@@ -7,6 +7,7 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,10 @@ import model.UserModel;
 /**
  * Servlet implementation class Subscribe
  */
-@WebServlet("/subscribe")
+@WebServlet(urlPatterns = {"/subscribe"}, 
+			initParams = {
+					@WebInitParam(name = "counterStart", value ="100")
+			})
 public class Subscribe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private int counter;   
@@ -32,8 +36,8 @@ public class Subscribe extends HttpServlet {
 
     @Override
 	public void init(ServletConfig config) throws ServletException {
-		this.counter = 0;
 		super.init(config);
+		this.counter = Integer.parseInt(config.getInitParameter("counterStart"));
 	}
 
 
@@ -57,5 +61,7 @@ public class Subscribe extends HttpServlet {
 		request.setAttribute("counter", counter);
 		RequestDispatcher dispatcher = context.getRequestDispatcher("/subscriber.jsp");
 		dispatcher.forward(request, response);
+		
+//		response.sendRedirect("subscriber.jsp");
 	}
 }
