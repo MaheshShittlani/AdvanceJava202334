@@ -403,4 +403,80 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) {
     // Use the context parameters
 }
 
+State management
+----------------------
+1. Http is a stateless protocol. means a data sent in a request will be removed from the server as soon as the response is returned.
 
+2. But to created intractive web pages, we need to remember the state of the web page. For example: if a user is already logged in then in the further request server need to rememeber that user is already logged in.
+
+
+Method of state Management
+----------------------------
+1. Query String
+2. Cookies
+3. Session
+4. Hidden form field.
+
+
+
+Query String
+--------------------
+In this technique, we can send the data by appending in URL.
+
+    1. localhost:8080/app/subscriberDetail?email=abc@example.com&mobile=1234567890
+
+    2. flipkart.com/product-detail?id=4325&category=shirt
+
+How to fetch the query string data
+---------------------------------------
+1. Query string data is passed into the URL in the same way as it is passed by submitting a form of GET method.
+
+2. When GET method is applied.
+    1. A form is submitted having GET method.
+    2. When request is send by typing URL directly.
+    3. When request is sent by clicking on a link.
+
+3. Fetching the data is similar as we are fetch the request parameter.
+
+    request.getParameter("email")
+    request.getParamter("mobile")
+
+
+Cookie
+-------------
+Cookie a text file created by the server and stored on the client machine and storing a piece of information in key-value pair.
+    domain - gmail.com
+    url - /
+    cooking name:
+    cooking value:
+    expiry time: 
+    https only: 
+
+Once cookie is create, it is sent to the server in each request.
+
+In Java, you can create and use cookies using the `javax.servlet.http.Cookie` class provided by the Servlet API. Here's how you can create and use a cookie in Java:
+
+1. Creating a cookie:
+   To create a cookie, you instantiate a new `Cookie` object and provide the name and value of the cookie. Here's an example:
+
+   Cookie cookie = new Cookie("cookieName", "cookieValue");
+
+   In this example, a cookie named "cookieName" is created with the value "cookieValue".
+
+   2. Setting additional cookie properties:
+   You can set additional properties for the cookie, such as the maximum age, domain, path, and whether it is secure or not. Here's an example:
+
+   
+   -cookie.setMaxAge(3600); // Set the cookie's maximum age in seconds
+   -cookie.setDomain(".example.com"); // Set the domain for which the - cookie is valid
+   -cookie.setPath("/"); // Set the path within the domain for which the cookie is valid
+   cookie.setSecure(true); // Set whether the cookie should only be transmitted over HTTPS
+   
+   These properties allow you to control the lifespan, scope, and security of the cookie
+
+3. Adding the cookie to the response:
+   To send the cookie to the client's browser, you add it to the response using the `addCookie()` method of the `HttpServletResponse` object. Here's an example:
+
+   response.addCookie(cookie);
+   
+   The cookie will be included in the response headers and sent to the client's browser.
