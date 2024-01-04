@@ -480,3 +480,62 @@ In Java, you can create and use cookies using the `javax.servlet.http.Cookie` cl
    response.addCookie(cookie);
    
    The cookie will be included in the response headers and sent to the client's browser.
+
+
+4. Retrieving cookies from the request:
+   To retrieve cookies sent by the client's browser, you can use the `getCookies()` method of the `HttpServletRequest` object. Here's an example:
+
+   Cookie[] cookies = request.getCookies();
+   
+   The `getCookies()` method returns an array of `Cookie` objects that were sent by the client.
+
+5. Accessing cookie properties:
+   You can access various properties of a cookie, such as its name, value, maximum age, and other attributes. Here's an example:
+
+   String cookieName = cookie.getName();
+   String cookieValue = cookie.getValue();
+   int maxAge = cookie.getMaxAge();
+   
+   These properties allow you to retrieve and use the information stored in the cookie.
+
+By creating and using cookies in Java, you can store and retrieve information on the client's browser, allowing you to maintain state and personalize user experiences in web applications.
+
+
+3. Session
+--------------
+How session tracking works in java?
+
+- Getting the session:
+	HttpSession session = request.getSession();
+            OR
+    HttpSession session = request.getSession(false);
+
+-Setting session attributes:
+	session.setAttribute("attributeName", attributeValue);
+
+-Getting session attributes:
+	Object attributeValue = session.getAttribute("attributeName");
+
+-Removing session attributes:
+	session.removeAttribute("attributeName");
+
+-Invalidating the session:
+	session.invalidate();
+
+Other methods
+----------------
+-getId():
+    Returns the unique identifier assigned to the session.
+
+-getCreationTime():
+    Returns the time (in milliseconds) when the session was created.
+
+-getLastAccessedTime():
+    Returns the time (in milliseconds) when the session was last accessed by the client.
+
+-setMaxInactiveInterval(int interval):
+    Sets the maximum time (in seconds) that the session can remain inactive before it is invalidated. A value of 0 or negative indicates that the session should never expire due to inactivity.
+
+-getMaxInactiveInterval():
+    Returns the maximum time (in seconds) that the session can remain inactive before it is invalidated.
+
