@@ -237,9 +237,17 @@ The `DriverManager` class in JDBC provides several methods to manage JDBC driver
 3. `getConnection(String url, String user, String password)`: Attempts to establish a connection to the database using the given JDBC URL, username, and password. The appropriate driver is selected based on the URL.
 
 4. `getConnection(String url, Properties info)`: Attempts to establish a connection to the database using the given JDBC URL and connection properties. The properties can include username, password, and other driver-specific settings.
+    Properties dbprop = new Properties();
+    dbprop.put("username","root");
+    dbprop.put("password","");
 
 5. `getDrivers()`: Retrieves an enumeration of all the JDBC drivers registered with the `DriverManager`.
+    
+        Enumeration<Driver> drivers =  DriverManager.getDrivers();
 
+        while(drivers.hasMoreElements()) {
+            System.out.println(drivers.nextElement());
+        }
 6. `getLoginTimeout()`: Retrieves the maximum time in seconds that the `DriverManager` waits while attempting to establish a database connection. If the timeout is exceeded, a `SQLException` is thrown.
 
 7. `setLoginTimeout(int seconds)`: Sets the maximum time in seconds that the `DriverManager` waits while attempting to establish a database connection.
@@ -267,6 +275,17 @@ The `Connection` interface in JDBC represents a connection to a database. It pro
 6. `rollback()`: Rolls back the current transaction. If the connection is not in auto-commit mode, this method is used to roll back the changes explicitly.
 
 7. `setAutoCommit(boolean autoCommit)`: Sets the auto-commit mode of the connection. When auto-commit is enabled, each SQL statement is treated as a separate transaction and automatically committed. When disabled, you need to call `commit()` or `rollback()` explicitly to manage transactions.
+
+con.setAutoCommit(false);
+    try {
+        st.executeQuery(query1);
+        st.executeQuery(query1);
+        st.executeQuery(query1);
+        st.executeQuery(query1);
+    } catch(Exception e) {
+        con.rollback();
+    }
+con.commit();
 
 8. `isClosed()`: Checks if the connection to the database is closed.
 
