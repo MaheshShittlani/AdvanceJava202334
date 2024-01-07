@@ -1,5 +1,18 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.myweb.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% 
+	String message = (String)session.getAttribute("message"); 
+	session.removeAttribute("message");
+	
+	User user = (User)session.getAttribute("user");
+	
+	if(user != null) {
+		response.sendRedirect("dashboard.jsp");
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +20,6 @@
 <title>UserApp | Login Page</title>
 </head>
 <body>
-	<% 
-		String message = (String)session.getAttribute("message"); 
-		session.removeAttribute("message");
-	%>
 	<p><%= message!=null ? message : "" %></p>
 	<form method="post" action="login">
 		<table align="center">
