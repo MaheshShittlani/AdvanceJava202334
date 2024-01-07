@@ -8,7 +8,7 @@
 <title>Signup Page</title>
 </head>
 <body>
-	<form method="post" action="user/signup">
+	<form method="post" action="signup">
 		<table align="center">
 			<tr>
 				<td colspan="2" align="center">

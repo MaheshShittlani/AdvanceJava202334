@@ -1,40 +1,38 @@
 package com.myweb.buiness;
 
-import java.io.IOException;
-
-import com.myweb.dao.UserDao;
-import com.myweb.dbutil.DBConnection;
-import com.myweb.model.User;
-
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import java.io.IOException;
+
+import com.myweb.dao.UserDao;
+import com.myweb.dbutil.DBConnection;
+import com.myweb.model.User;
 
 /**
- * Servlet implementation class UserSignup
+ * Servlet implementation class UserLogin
  */
-
-@WebServlet(name = "UserSignup", description = "This servlet is used to handle the user signup process", urlPatterns = {
-		"/signup" })
-public class UserSignup extends HttpServlet {
+@WebServlet(name = "UserLogin", description = "This servlet is used to perfor the user login", urlPatterns = {
+		"/login" })
+public class UserLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserDao userDao;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserSignup() {
+	public UserLogin() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		userDao = new UserDao(new DBConnection());
 		super.init(config);
-		DBConnection dbConnection = new DBConnection();
-		this.userDao = new UserDao(dbConnection);
 	}
 	
 	/**
@@ -43,20 +41,19 @@ public class UserSignup extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		User user = new User(name, email, password);
+		User user = userDao.authenticate(new User(email, password));
 		
-		boolean isRegistered = userDao.registerUser(user);
-		
-		if(isRegistered) {
+		HttpSession session =  request.getSession();
+		if(user != null) {
+			session.setAttribute("user", user);
+			response.sendRedirect("dashboard.jsp");
+		} else {
+			session.setAttribute("message", "Invalid Email / Password");
 			response.sendRedirect("index.jsp");
-		}else {
-			response.sendRedirect("signup.jsp");
 		}
-		
 	}
 
 }
